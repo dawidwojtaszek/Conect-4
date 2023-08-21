@@ -43,12 +43,21 @@ class GameControl {
     const smallDiagonalCheck = (x, y) => {
       let counter = 0;
       let testValue = this.board.board[x][y];
-      for (let i = x; i < x + 4; i++) {
-        for (let j = y; j < y + 4; j++) {
+
+      for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 4; j++) {
           if (i === j) {
-            if (this.board.board[i][j] === testValue) {
+            if (
+              this.board.board[x + i][y + j] === testValue &&
+              testValue != 0
+            ) {
               counter++;
             }
+            // console.log("sprawdzam");
+            // console.log(x + i);
+            // console.log(y + j);
+            // console.log("test");
+            // console.log(testValue);
           }
         }
       }
@@ -58,6 +67,7 @@ class GameControl {
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 3; j++) {
         console.log(smallDiagonalCheck(i, j));
+        // console.log(i, j);
       }
     }
   };
