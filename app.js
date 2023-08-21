@@ -40,7 +40,7 @@ class GameControl {
     // =============== DIAGONAL CHECK ==================
 
     //--------function to check diagonal in 4x4 array
-    const smallDiagonalCheck = (x, y) => {
+    const smallDiagonalCheckRight = (x, y) => {
       let counter = 0;
       let testValue = this.board.board[x][y];
 
@@ -53,11 +53,21 @@ class GameControl {
             ) {
               counter++;
             }
-            // console.log("sprawdzam");
-            // console.log(x + i);
-            // console.log(y + j);
-            // console.log("test");
-            // console.log(testValue);
+          }
+        }
+      }
+      return counter;
+    };
+    const smallDiagonalChecLeft = (x, y) => {
+      let counter = 0;
+      let testValue = this.board.board[x][y + 3];
+
+      for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 4; j++) {
+          if (i + j === 3) {
+            if (this.board.board[x + i][y + j] === testValue) {
+              counter++;
+            }
           }
         }
       }
@@ -66,8 +76,8 @@ class GameControl {
 
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 3; j++) {
-        console.log(smallDiagonalCheck(i, j));
-        // console.log(i, j);
+        // console.log(smallDiagonalCheckRight(i, j));
+        console.log(smallDiagonalChecLeft(i, j));
       }
     }
   };
