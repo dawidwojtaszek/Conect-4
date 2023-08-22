@@ -39,64 +39,62 @@ class GameControl {
   checkWin = () => {
     let isWin = false;
     // =============== DIAGONAL CHECK ==================
+    const diagonalCheck = () => {
+      const smallDiagonalCheckRight = (x, y) => {
+        let counter = 0;
+        let testValue = this.board.board[x][y];
 
+        for (let i = 0; i < 4; i++) {
+          for (let j = 0; j < 4; j++) {
+            if (i === j) {
+              if (
+                this.board.board[x + i][y + j] === testValue &&
+                testValue != 0
+              ) {
+                counter++;
+              }
+            }
+          }
+        }
+        return counter;
+      };
+      const smallDiagonalCheckLeft = (x, y) => {
+        let counter = 0;
+        let testValue = this.board.board[x][y + 3];
+
+        for (let i = 0; i < 4; i++) {
+          for (let j = 0; j < 4; j++) {
+            if (i + j === 3) {
+              if (
+                this.board.board[x + i][y + j] === testValue &&
+                testValue != 0
+              ) {
+                counter++;
+              }
+            }
+          }
+        }
+        return counter;
+      };
+      for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 3; j++) {
+          if (
+            smallDiagonalCheckLeft(i, j) >= 4 ||
+            smallDiagonalCheckRight(i, j) >= 4
+          ) {
+            // return true
+          }
+        }
+      }
+    };
     //--------function to check diagonal in 4x4 array
-    const smallDiagonalCheckRight = (x, y) => {
-      let counter = 0;
-      let testValue = this.board.board[x][y];
 
-      for (let i = 0; i < 4; i++) {
-        for (let j = 0; j < 4; j++) {
-          if (i === j) {
-            if (
-              this.board.board[x + i][y + j] === testValue &&
-              testValue != 0
-            ) {
-              counter++;
-            }
-          }
-        }
-      }
-      return counter;
-    };
-    const smallDiagonalCheckLeft = (x, y) => {
-      let counter = 0;
-      let testValue = this.board.board[x][y + 3];
+    const verticalCheck = () => {};
+    console.log("first board");
+    console.log(this.board.board);
 
-      for (let i = 0; i < 4; i++) {
-        for (let j = 0; j < 4; j++) {
-          if (i + j === 3) {
-            if (
-              this.board.board[x + i][y + j] === testValue &&
-              testValue != 0
-            ) {
-              counter++;
-            }
-          }
-        }
-      }
-      return counter;
-    };
-
-    for (let i = 0; i < 4; i++) {
-      for (let j = 0; j < 3; j++) {
-        if (
-          smallDiagonalCheckLeft(i, j) >= 4 ||
-          smallDiagonalCheckRight(i, j) >= 4
-        ) {
-          isWin = true;
-        }
-      }
-    }
     //================HORIZONTAL CHECK ======================
-    for (let i = 0; i <= this.board.board.length; i++) {
-      const counter1 = this.board.board[i].filter((e) => e === 1).length;
-      const counter2 = this.board.board[i].filter((e) => e === 2).length;
 
-      if (counter1 >= 4 || counter2 >= 4) {
-        isWin = true;
-      }
-    }
     return isWin;
   };
   changeRound = () => {};
@@ -114,13 +112,15 @@ const testValues = () => {
   game.board.setToken(1, 2);
   game.board.setToken(1, 2);
   game.board.setToken(1, 2);
+  game.board.setToken(2, 3);
   game.board.setToken(1, 3);
   game.board.setToken(1, 3);
-  game.board.setToken(1, 3);
-  game.board.setToken(1, 3);
+  game.board.setToken(2, 3);
+  game.board.setToken(2, 4);
+  game.board.setToken(1, 4);
 };
 console.log("first");
 testValues();
 game.board.printBoard();
 
-game.checkWin();
+console.log(game.checkWin());
