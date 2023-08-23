@@ -82,7 +82,7 @@ class GameControl {
             smallDiagonalCheckLeft(i, j) >= 4 ||
             smallDiagonalCheckRight(i, j) >= 4
           ) {
-            // return true
+            isWin = true;
           }
         }
       }
@@ -90,11 +90,43 @@ class GameControl {
     //--------function to check diagonal in 4x4 array
 
     const verticalCheck = () => {};
-    console.log("first board");
-    console.log(this.board.board);
+
+    for (let i = 0; i < 7; i++) {
+      for (let j = 0; j < 3; j++) {
+        let counter = 0;
+        let testValue = this.board.board[i][j];
+        for (let x = 0; x < 4; x++) {
+          if (testValue === this.board.board[i][x + j] && testValue != 0) {
+            counter++;
+          }
+        }
+        if (counter === 4) {
+          isWin = true;
+        }
+      }
+    }
 
     //================HORIZONTAL CHECK ======================
+    const horizontalCheck = () => {
+      for (let i = 0; i < 6; i++) {
+        for (let j = 0; j < 4; j++) {
+          let counter = 0;
+          let testValue = this.board.board[j][i];
+          for (let x = 0; x < 4; x++) {
+            if (testValue === this.board.board[j + x][i] && testValue != 0) {
+              counter++;
+            }
+          }
+          if (counter === 4) {
+            isWin = true;
+          }
+        }
+      }
+    };
 
+    horizontalCheck();
+    verticalCheck();
+    diagonalCheck();
     return isWin;
   };
   changeRound = () => {};
@@ -113,7 +145,7 @@ const testValues = () => {
   game.board.setToken(1, 2);
   game.board.setToken(1, 2);
   game.board.setToken(2, 3);
-  game.board.setToken(1, 3);
+  game.board.setToken(2, 3);
   game.board.setToken(1, 3);
   game.board.setToken(2, 3);
   game.board.setToken(2, 4);
