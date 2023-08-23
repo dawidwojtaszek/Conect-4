@@ -19,7 +19,16 @@ class Board {
     let i = this.board[row].indexOf(0);
     this.board[row][i] = player;
   };
-  resetBoard = () => {};
+  resetBoard = () => {
+    let board = [];
+    for (let i = 0; i < 7; i++) {
+      board[i] = [];
+      for (let j = 0; j < 6; j++) {
+        board[i].push(0);
+      }
+    }
+    this.board = board;
+  };
 }
 class GameControl {
   constructor(playerOne, playerTwo, board) {
