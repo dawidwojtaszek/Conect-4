@@ -45,6 +45,9 @@ class GameControl {
       this.activePlayer = 1;
     }
   };
+  getActivePlayer = () => {
+    return this.activePlayer;
+  };
   checkWin = () => {
     let isWin = false;
     // =============== DIAGONAL CHECK ==================
@@ -138,7 +141,11 @@ class GameControl {
     diagonalCheck();
     return isWin;
   };
-  changeRound = () => {};
+  playTurn = (row) => {
+    this.board.setToken(this.getActivePlayer(), row);
+    this.changeActivePlayer();
+  };
+  playRound = () => {};
 }
 
 const board = new Board();
