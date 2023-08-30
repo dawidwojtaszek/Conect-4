@@ -148,6 +148,8 @@ class GameControl {
   playRound = () => {};
 }
 
+class GUI {}
+
 const board = new Board();
 
 const game = new GameControl("asdfas", "dddd", board);
